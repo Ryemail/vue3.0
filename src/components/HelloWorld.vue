@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { computed, onMounted, onUnmounted, reactive, ref, toRefs, watch } from 'vue';
+import { computed, inject, onMounted, onUnmounted, reactive, ref, toRefs, watch } from 'vue';
 
 function useMouse() {
     const x = ref(0);
@@ -49,7 +49,8 @@ export default {
         msg: String,
     },
     setup(props, cxt) {
-        console.log(props.msg, cxt);
+        const inj = inject('name');
+        console.log(props.msg, cxt, inj);
 
         const { x, y } = useMouse();
 
