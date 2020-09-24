@@ -1,28 +1,29 @@
 <template>
-    <div class="hello">
-        <h1>{{ helo }}</h1>
-        <h1>{{ count }}</h1>
-        <span>plusOne is {{ plusOne }}</span>
-        <button @click="increment">count++</button>
-        <input type="text" v-model="name" />
-        {{ name }}
-        <h1>{{ x }}---{{ y }}</h1>
-        <ul>
-            <li>
-                <a
-                    href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-                    target="_blank"
-                    rel="noopener"
-                    >babel</a
-                >
-            </li>
-            <li>
-                <a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router">
-                    router
-                </a>
-            </li>
-        </ul>
-    </div>
+    <fragments>
+        <div>Fragments</div>
+        <div class="hello">
+            <h1>{{ helo }}</h1>
+            <h1>{{ count }}</h1>
+            <span>plusOne is {{ plusOne }}</span>
+            <button @click="increment">count++</button>
+            <input type="text" v-model="name" />
+            {{ name }}
+            <h1>{{ x }}---{{ y }}</h1>
+            <ul>
+                <li>
+                    <a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel">
+                        babel
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router">
+                        router
+                    </a>
+                </li>
+            </ul>
+            <!-- Fragments -->
+        </div>
+    </fragments>
 </template>
 
 <script>
@@ -63,13 +64,18 @@ export default {
             age: 23,
         });
         state = toRefs(state);
+        // console.log(state, state.name.value, state.age.value, 'reactive');
 
         const increment = () => {
             count.value++;
         };
-        watch(count, val => {
-            console.log(val);
-        });
+        watch(
+            () => count.value * 2,
+            val => {
+                console.log(val);
+                // count.value = val;
+            }
+        );
 
         return {
             helo: props.msg,
